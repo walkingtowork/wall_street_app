@@ -8,8 +8,6 @@
     <li>
       <%= client.name %>
       <br>
-      <a href="/new_portfolio">New Portfolio</a>
-      <br>
       <a href="/add_stock">Add new stock to a portfolio</a>
       <br>
       Portfolios: <%= client.portfolios.map {|portfolio| portfolio.name }.join(", ") %>

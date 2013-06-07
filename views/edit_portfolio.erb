@@ -1,7 +1,9 @@
 
-<%= portfolio.id.stocks.map {|stock| stock.name }.join(", ") %>
+<%= @portfolio.name %>
+<br>
+Currently contains: <%= @portfolio.stocks.map {|stock| stock.name }.join(", ") %>
 
-<form method="post" action="/save_portfolio/:portfolio_id">
+<form method="post" action="/save_portfolio/<%= @portfolio.id %>">
   Which stocks would you like to add to your portfolio?
   <br>
   <% Stock.all.each do |stock| %>

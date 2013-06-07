@@ -52,19 +52,6 @@ post "/new_stock" do
 end
 
 # PORTFOLIOS
-get "/new_portfolio" do
-  erb :new_portfolio
-end
-
-post "/new_portfolio" do
-  @portfolio = Portfolio.new(params[:portfolio])
-
-  if @portfolio.save
-    redirect "/"
-  else
-    erb :new_portfolio
-  end
-end
 
 get "/edit_portfolio/:portfolio_id" do
   @portfolio = Portfolio.find_by_id(params[:portfolio_id])
@@ -73,7 +60,9 @@ end
 
 post "/save_portfolio/:portfolio_id" do
   @portfolio = Portfolio.find_by_id(params[:portfolio_id])
+  @stock = Stock.find_by_id(params[:stock_id]) #added this line
   if @portfolio.update_attributes(params[:portfolio])
+     @stock.update_attributes(params[:stock]) #and this
     redirect "/"
   else
     erb :edit_portfolio
@@ -85,11 +74,12 @@ get "/edit_client/:client_id" do
   erb :edit_client
 end
 
+#ALLOWS YOU TO ADD NEW PORTFOLIOS
 post "/save_client/:client_id" do
   @client = Client.find_by_id(params[:client_id])
 
-  if @client.save
-
+  if
+    @client.save
     @portfolio = Portfolio.create(params[:portfolio])
     @client.update_attributes(params[:client])
     @portfolio.update_attributes(:client_id => @client.id)
@@ -98,11 +88,6 @@ post "/save_client/:client_id" do
     erb :edit_client
   end
 end
-
-
-
-
-
 
 post "/delete_client/:client_id" do
   @client = Client.find_by_id(params[:client_id])
