@@ -1,2 +1,14 @@
-<form method="post" action="/save_portfolio/:portfolio:id">
+
+<%= portfolio.id.stocks.map {|stock| stock.name }.join(", ") %>
+
+<form method="post" action="/save_portfolio/:portfolio_id">
   Which stocks would you like to add to your portfolio?
+  <br>
+  <% Stock.all.each do |stock| %>
+    <input type="checkbox" name="portfolio[stock_ids][]" value="<%= stock.id %>">
+      <%= stock.name %>
+      <br>
+
+  <% end %>
+  <button>Save Portfolio</button>
+</form>

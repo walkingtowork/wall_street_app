@@ -7,9 +7,18 @@
   <% @clients.each do |client| %>
     <li>
       <%= client.name %>
+      <br>
       <a href="/new_portfolio">New Portfolio</a>
+      <br>
       <a href="/add_stock">Add new stock to a portfolio</a>
-      <%= client.portfolios.map {|portfolio| portfolio.name.join( ", ")} %>
+      <br>
+      Portfolios: <%= client.portfolios.map {|portfolio| portfolio.name }.join(", ") %>
+      <br>
+      <% client.portfolios.each do |portfolio| %>
+      <a href="/edit_portfolio/<%= portfolio.id %>"><%= portfolio.name %></a>
+      <% end %>
+      <br>
+      <a href="/edit_client/<%= client.id %>">Edit Client</a>
     </li>
   <% end %>
 </ul>

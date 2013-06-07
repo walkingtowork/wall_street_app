@@ -1,7 +1,33 @@
-<!-- Client name
-
-List Portfolios
+<!--
 
 Add Portfolio
 
 Add Stock -> Select Portfolio -->
+
+Edit Client Information
+
+<form method="post" action="/save_client/<%= @client.id %>">
+  Client Name:
+  <input type="text" name="client[name]" value ="<%= @client.name%>">
+  <br>
+  Client Portfolios:
+<!--   LIST PORTFOLIOS -->
+
+<!-- ADD PORTFOLIO -->
+  Add a new portfolio?
+  Name:
+  <input type="text" name="portfolio[name]">
+  <br>
+  Which stocks would you like to add to your portfolio?
+  <br>
+  <% Stock.all.each do |stock| %>
+    <input type="checkbox" name="portfolio[stock_ids][]" value="<%= stock.id %>">
+      <%= stock.name %>
+      <br>
+
+  <% end %>
+  <button>Save Portfolio</button>
+</form>
+
+<form method="post" action="/delete_client/<%= @client.id %>">
+  <button>Remove Client</button>

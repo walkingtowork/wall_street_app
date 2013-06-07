@@ -80,9 +80,35 @@ post "/save_portfolio/:portfolio_id" do
   end
 end
 
+get "/edit_client/:client_id" do
+  @client = Client.find_by_id(params[:client_id])
+  erb :edit_client
+end
+
+post "/save_client/:client_id" do
+  @client = Client.find_by_id(params[:client_id])
+
+  if @client.save
+
+    @portfolio = Portfolio.create(params[:portfolio])
+    @client.update_attributes(params[:client])
+    @portfolio.update_attributes(:client_id => @client.id)
+    redirect "/"
+  else
+    erb :edit_client
+  end
+end
 
 
 
+
+
+
+post "/delete_client/:client_id" do
+  @client = Client.find_by_id(params[:client_id])
+  @client.delete
+  redirect "/"
+end
 
 
 
