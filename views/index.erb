@@ -1,0 +1,22 @@
+<nav>
+  <a href="/new_client">Add a new client</a>
+  <a href="/new_stock">Add a new stock</a>
+</nav>
+<h1>Clients</h1>
+<ul>
+  <% @clients.each do |client| %>
+    <li>
+      <%= client.name %>
+      <a href="/new_portfolio">New Portfolio</a>
+      <a href="/add_stock">Add new stock to a portfolio</a>
+      <%= client.portfolios.map {|portfolio| portfolio.name.join( ", ")} %>
+    </li>
+  <% end %>
+</ul>
+
+<h1>Stocks Offered</h1>
+<ul>
+  <% @stocks.each do |stock| %>
+  <li><%= stock.name %> - <%= stock.ticker %></li>
+  <% end %>
+</ul>

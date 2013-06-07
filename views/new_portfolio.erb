@@ -1,0 +1,14 @@
+<form method="post" action="/new_portfolio">
+  Name:
+  <input type="text" name="portfolio[name]">
+  <br>
+  Which stocks would you like to add to your portfolio?
+  <br>
+  <% Stock.all.each do |stock| %>
+    <input type="checkbox" name="portfolio[stock_ids][]" value="<%= stock.id %>">
+      <%= stock.name %>
+      <br>
+
+  <% end %>
+  <button>Save Portfolio</button>
+</form>
